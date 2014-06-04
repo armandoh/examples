@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+
+//looks at the maven repo for dependencies
+//we can look at the local as well
+repositories {
+    mavenCentral()
+}
+
+configurations {
+	myConfig
+}
+
+dependencies {
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile "org.apache.commons:commons-lang3:3.3.2"
+    //adding apache commons lang3 to myConfig
+    myConfig "org.apache.commons:commons-lang3:3.3.2"
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+//order matters...
+jar {	
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version, 'Main-Class' : 'com.example.gradle.Hello'
+    }
+    //from configurations.compile.collect { zipTree it }
+    //zipTree unpacks the jar dependencies and pack them with the final jar
+     from configurations.myConfig.collect { zipTree it }
+}
+
