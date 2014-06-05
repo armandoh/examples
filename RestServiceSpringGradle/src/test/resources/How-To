@@ -1,0 +1,36 @@
+
+How-to:
+
+
+/******************************************************************************************************
+*** 								ECLIPSE															***	
+*******************************************************************************************************/
+From eclipse:
+
+* Select the project
+* Right click on the project 
+* Run As -> Gradle build
+* Type the following tasks to run:
+	clean build 
+	bootRun
+* bootRun will start the application from the jar, 
+	behind the scenes it starts an embedded Apache Tomcat Server
+
+
+
+/******************************************************************************************************
+*** 							COMMAND LINE														***	
+*******************************************************************************************************/
+
+Before trying make sure Gradle is on your path.
+
+
+From the command line execute:
+
+prompt> cd ${your_git_home}\examples\RestServiceSpringGradle
+prompt> gradle clean build && java -jar build/libs/my-rest-service-1.0.jar
+
+For stopping... use the key combination:
+
+prompt> Ctrl + C
+

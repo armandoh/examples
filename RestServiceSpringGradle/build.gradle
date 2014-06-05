@@ -1,0 +1,50 @@
+sourceCompatibility = 1.7
+version = '1.0'
+
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+/*
+jar {
+    baseName = 'spring-gradle-rest-service'    
+    version = '1.0'
+    manifest {
+    	baseName = 'spring-gradle-rest-service'
+    	version = '1.0'
+        attributes 'Implementation-Title': 'Spring & Gradle Rest services', 'Implementation-Version': version, 'Main-Class' : 'com.example.Application'
+    }
+}
+*/
+jar {
+    baseName = 'my-rest-service'
+    version =  '1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    testCompile("junit:junit")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
+
+
