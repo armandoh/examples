@@ -11,6 +11,7 @@ public class PersonManager {
 	private static List<Person> people = null;
 
 	public PersonManager() {
+		System.out.println("--> Starting person Manager (Apache CXF without Spring)");
 		initPeople();
 	}
 

@@ -17,12 +17,16 @@ import com.example.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service("PersonService")
 public class PersonServiceImpl implements PersonService {
 
 	@Autowired
 	private PersonManager personMgr;
+	
+	
+	public PersonServiceImpl (){
+		System.out.println(" Apache CXF REST being instantiated + Spring");
+	}
 	
 	@GET
 	@Path("/helloWorld")

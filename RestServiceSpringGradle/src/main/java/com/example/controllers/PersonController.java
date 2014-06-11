@@ -24,6 +24,10 @@ public class PersonController {// implements PersonService {
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
 
+	public PersonController (){
+		System.out.println(" Spring Web REST being instantiated - controller");
+	}
+	
 	@Autowired
 	private PersonManager personMgr;
 

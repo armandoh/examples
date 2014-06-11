@@ -14,10 +14,13 @@ import com.example.dto.Person;
 import com.example.model.PersonManager;
 import com.example.services.PersonService;
 
-
 public class PersonServiceImpl implements PersonService {
 
 	PersonManager personMgr = new PersonManager();
+	
+	public PersonServiceImpl (){
+		System.out.println(" Apache CXF REST being instantiated - Without Spring");
+	}
 	
 	@GET
 	@Path("/helloWorld")
