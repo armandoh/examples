@@ -1,0 +1,41 @@
+sourceCompatibility = 1.7
+version = '1.0'
+
+buildscript {
+    repositories {
+        maven { 
+        	url "http://repo.spring.io/libs-snapshot"        	
+        }
+        maven { 
+        	url "http://download.java.net/maven/2/"        	
+        }        
+        mavenLocal()
+    }
+    
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+jar {
+    baseName = 'my-rest-jersey'
+    version =  '1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {   
+    compile group: 'javax.ws.rs', name: 'jsr311-api', version: '1.0'
+    compile group: 'com.sun.jersey', name: 'jersey-server', version: '1.8'
+    compile group: 'com.sun.jersey', name: 'jersey-core', version: '1.8'
+    compile group: 'com.sun.jersey', name: 'jersey-json', version: '1.8'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
+
+
