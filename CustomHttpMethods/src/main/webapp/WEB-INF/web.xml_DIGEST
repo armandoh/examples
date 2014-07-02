@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>CustomHttpMethods</display-name>
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>myCustomHttpMethods</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/services.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>WEB-INF/properties/log4j.properties</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<security-constraint>
+		<!-- Specifies the part of the application to be authenticated -->
+		<web-resource-collection>
+			<web-resource-name>CustomHttpMethods</web-resource-name>
+
+			<!-- Denotes which URI patterns needs to be protected. -->
+			<url-pattern>/rest/*</url-pattern>
+
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>LINK</http-method>
+			<http-method>UNLINK</http-method>
+		</web-resource-collection>
+
+		<!-- Specifies which roles defined in tomcat-users.xml or database have access to the 
+			resources. -->
+		<auth-constraint>
+			<role-name>admin</role-name>
+			<role-name>manager</role-name>
+		</auth-constraint>
+
+		<!-- Requests are processed with encryption -->
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<!-- Denotes the authentication method, which in our case is DIGEST -->
+	<login-config>
+		<auth-method>DIGEST</auth-method> 
+        <realm-name>DigestAuthentication</realm-name> 
+	</login-config>
+
+</web-app>
